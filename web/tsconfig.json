@@ -21,10 +21,12 @@
     "jsx": "react-jsx",
 		"baseUrl": ".",
 		"paths": {
+			"$modal/*": ["src/modal/*"],
 			"$app/*": ["src/*"]
 		}
 	},
   "include": [
-    "src"
+    "src",
+		"types"
   ]
 }
