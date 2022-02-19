@@ -3,3 +3,6 @@
 
 # MacOS Stuff
 .DS_Store
+
+# NodeJS Stuff
+node_modules
