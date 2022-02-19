@@ -1,0 +1,5 @@
+.idea
+*.iml
+
+# MacOS Stuff
+.DS_Store
