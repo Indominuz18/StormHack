@@ -134,6 +134,7 @@ export class LocalstorageAPI implements API {
 
 	logout(): Result<void> {
 		this.currentUser = null;
+		this._save();
 		return {};
 	}
 
@@ -221,7 +222,12 @@ export class LocalstorageAPI implements API {
 	getLoginUserInfo(): Result<User> {
 		if (this.currentUser === null) return {error: new Error('not logged in')};
 
-		return {error: new Error("Not logged in.")}; // TODO(eth-p): This
+		return {
+			value: {
+				...this.currentUser.info,
+				id: this.currentUser.id,
+			}
+		};
 	}
 
 }
