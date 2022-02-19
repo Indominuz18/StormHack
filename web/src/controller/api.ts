@@ -1,5 +1,6 @@
 import {Assignment, AssignmentID, AssignmentWithoutID} from "$modal/assignment";
 import {Session} from "$modal/session";
+import {User} from "$modal/user";
 
 /**
  * API is an interface describing how to interact with the calendar application's API.
@@ -15,6 +16,31 @@ export interface API {
 	 * @endpoint POST /api/v1/login
 	 */
 	login(username: string, password: Password): Result<LoginSession>;
+
+	/**
+	 * Attempts to register a new user on the server.
+	 * This will automatically log the user in.
+	 *
+	 * @param username The username.
+	 * @param password The user's password.
+	 *
+	 * @endpoint POST /api/v1/register
+	 */
+	register(username: string, password: Password): Result<LoginSession>;
+
+	/**
+	 * Attempts to log out from the server.
+	 *
+	 * @endpoint POST /api/v1/logout
+	 */
+	logout(): Result<void>;
+
+	/**
+	 * Gets the currently-logged-in user's info.
+	 *
+	 * @endpoint GET /api/v1/me
+	 */
+	getLoginUserInfo(): Result<User>;
 
 	/**
 	 * Gets an assignment by its ID.
