@@ -1,10 +1,9 @@
-import React, {FormEvent, useState} from 'react';
+import React, {useState} from 'react';
 import Controller from "$app/controller/controller";
 
 import TextField from "$app/components/input/TextField";
 import PasswordField from "$app/components/input/PasswordField";
 import Centered from "$app/components/layout/Centered";
-
 
 import Styles from './Login.module.scss';
 import Form from "$app/components/input/Form";
