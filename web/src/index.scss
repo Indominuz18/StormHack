@@ -1,13 +1,36 @@
+@import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;700&display=swap");
+
+// Set up body and ensure the root covers the entire page at minimum.
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  padding: 0;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
+body {
+  position: relative;
+  display: flex;
+  flex: 1 0 auto;
+  min-width: 100vw;
+  min-height: 100vh;
+}
+
+#root {
+  display: block;
+  min-width: 100%;
+  min-height: 100%;
+}
+
+// Fix padding problems globally.
+* {
+  box-sizing: border-box;
+}
+
+// Font stuff.
+body {
+  font-family: 'Poppins', sans-serif;
+  //font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  //'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  //sans-serif;
 }

@@ -1,26 +1,38 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.scss';
+import {BrowserRouter, Routes, Route} from "react-router-dom";
+import {useAsync} from "$app/react-async-hook";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+import Controller from "$app/controller/controller";
+
+import Login from "$app/pages/Login";
+import Main from "$app/pages/Main";
+
+export interface AppProps {
+	controller: Controller
 }
 
-export default App;
+export default function App(props: AppProps) {
+	const {controller} = props;
+	let result = useAsync<boolean, any>(() => controller.isLoggedIn());
+	if (result === useAsync.loading) {
+		return (
+			<div>Loading...</div> // TODO(eth-p): Maybe a better loading screen?
+		)
+	}
+
+	// If the user isn't logged in, show the login page.
+	if (result.value === false) {
+		return (
+			<Login controller={controller}/>
+		)
+	}
+
+	// If the user is logged in, show the app.
+	return (
+		<BrowserRouter>
+			<Routes>
+				<Route path="/" element={<Main/>}/>
+			</Routes>
+		</BrowserRouter>
+	);
+}

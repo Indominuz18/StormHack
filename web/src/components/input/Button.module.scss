@@ -1,0 +1,25 @@
+@import "$app/_vars.scss";
+
+.primaryButton, .linkButton {
+  cursor: pointer;
+
+  &.large {
+    padding: $input-button-padding * 2;
+  }
+}
+
+.primaryButton {
+  background: $color-primary;
+  border: $color-primary-dark 2px solid;
+  display: block;
+
+  padding: $input-button-padding;
+  border-radius: $input-button-radius;
+}
+
+.linkButton {
+  appearance: none;
+  background: none;
+  padding: 0;
+  border: none;
+}
