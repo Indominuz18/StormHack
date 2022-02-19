@@ -1,5 +1,6 @@
 .idea
 *.iml
+.env
 
 # MacOS Stuff
 .DS_Store
