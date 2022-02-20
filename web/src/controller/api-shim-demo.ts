@@ -6,18 +6,15 @@ const GENERATOR = {
 	ACCENTS: [Accent.Mint, Accent.Lavender, Accent.Pyro, Accent.Sea],
 
 	COURSE_NAMES: [
-		'HACK',
-		'CMPT',
-		'SFU',
-		'PHIL',
-		'PSYC',
-		'STORM',
+		'HACK', 'CMPT', 'SFU', 'LING', 'ENG', 'PAIN',
+		'PHIL', 'PSYC', 'STORM', 'COGS', 'MACM', 'MATH',
 	],
 
 	NOUNS: [
 		"Computer", "Hackathon", "Website", "React", "NodeJS",
 		"Godzilla", "Mecha Frogs", "Philosophy", "AI", "Bitcoin",
-		"eSports", "Dogecoin", "Call of Duty", "MLM", "History"
+		"eSports", "Dogecoin", "Call of Duty", "MLM", "History",
+		"Lasers", "Windows 11", "Linux", "Piranhas", "Livestock",
 	],
 
 	ASSIGNMENT_TEMPLATES: [
@@ -32,10 +29,7 @@ const GENERATOR = {
 	],
 
 	SESSION_TEMPLATES: [
-		(n: string) => `Design`,
-		(n: string) => `Prep`,
-		(n: string) => `Review`,
-		(n: string) => `${n}`,
+		(n: string) => `${n} Work`,
 	]
 };
 
