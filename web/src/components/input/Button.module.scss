@@ -2,7 +2,6 @@
 
 .button {
   cursor: pointer;
-  --button-color: var(--accent);
 
   &.disabled {
     cursor: not-allowed;
@@ -34,15 +33,18 @@
 .squareButton,
 .squareInvertedButton {
   appearance: none;
-  border: var(--button-color) 2px solid;
+  border: var(--accent) 2px solid;
+  border-color: var(--button-color);
 }
 
 .squareButton {
+  background-color: var(--accent);
   background-color: var(--button-color);
   color: #fff;
 }
 
 .squareInvertedButton {
   background-color: #fff;
+  color: var(--accent);
   color: var(--button-color);
 }

@@ -61,6 +61,10 @@ function AssignmentPlanner(props: AssignmentPlanner.Props) {
 						className={Styles.newSessionButton}>+</FancyCard>
 				</div>
 			</div>
+			<div className={Styles.actions}>
+				<Button kind="square" onClick={props.onReturn}>Return</Button>
+				<Button kind="square-inverted" disabled>Edit</Button>
+			</div>
 		</div>
 	);
 }

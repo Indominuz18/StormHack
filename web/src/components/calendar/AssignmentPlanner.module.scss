@@ -2,6 +2,10 @@
 
 $padding: 1rem;
 
+.assignmentPlanner {
+  position: relative;
+}
+
 .header {
   background: $color-main;
   color: #fff;
@@ -39,6 +43,22 @@ $padding: 1rem;
 
   .due {
 
+  }
+}
+
+.actions {
+  --button-color: #{$color-main};
+
+  display: flex;
+  height: 2em;
+
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+
+  > * {
+    flex: 1 0 auto;
   }
 }
 
