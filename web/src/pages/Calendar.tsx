@@ -14,8 +14,6 @@ namespace Calendar {
 }
 
 function Calendar(props: Calendar.Props) {
-	const {controller} = props;
-
 	const start = new Date();
 	const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7); // FIXME: This'll probably break towards the end of the year
 
@@ -29,7 +27,6 @@ function Calendar(props: Calendar.Props) {
 						onAssignmentClick={onAssignmentClick}/>
 	) : (
 		<AssignmentPlanner {...props}
-						   timeFormatter={controller.timeformatter}
 						   className={Styles.planner}
 						   assignment={highlighedAssignment}
 						   onReturn={() => setHighlightedAssignment(null)}/>
