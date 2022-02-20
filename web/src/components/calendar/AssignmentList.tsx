@@ -3,7 +3,7 @@ import React, {PropsWithChildren} from 'react';
 import Controller from "$app/controller/controller";
 import {useAsync} from "$app/react-async-hook";
 import ErrorCard from "$app/components/misc/ErrorCard";
-import {Assignment} from "$modal/assignment";
+import {Assignment, AssignmentID} from "$modal/assignment";
 import AssignmentCard from "$app/components/calendar/AssignmentCard";
 
 import Styles from "./AssignmentList.module.scss";
@@ -14,6 +14,8 @@ namespace AssignmentList {
 		controller: Controller;
 		start: Date;
 		end: Date;
+
+		onAssignmentClick?: (a: Assignment) => void;
 	}
 }
 
@@ -30,7 +32,18 @@ function AssignmentList(props: AssignmentList.Props) {
 		assignmentsContents = <ErrorCard error={result.error}/>;
 	} else if (result.value != null) {
 		assignmentsContents = result.value
-			.map(a => <AssignmentCard timeFormatter={controller.timeformatter} key={a.id} assignment={a}/>);
+			.map(a => {
+				const onClick = props.onAssignmentClick == null ? undefined : ((evt: any) => {
+					props.onAssignmentClick!(a);
+				});
+
+				return <AssignmentCard
+					timeFormatter={controller.timeformatter}
+					key={a.id}
+					assignment={a}
+					onClick={onClick}
+				/>
+			});
 	}
 
 	return (

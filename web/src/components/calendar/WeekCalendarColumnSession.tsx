@@ -10,8 +10,9 @@ import Accents from "$app/accents.module.scss";
 
 namespace WeekCalendarColumnSession {
 	export interface Props {
+		filled?: boolean;
 		controller: Controller;
-		session: Session
+		session: Session;
 		timeFormatter: TimeFormatter;
 		yBegin: number;
 		yEnd: number;
@@ -41,6 +42,7 @@ function WeekCalendarColumnSession(props: WeekCalendarColumnSession.Props) {
 		<div className={[
 			Styles.sessionCard,
 			height <= 50 ? Styles.sessionCardSmall : null,
+			props.filled ? Styles.sessionCardFilled : null,
 			Accents[assignment.color ?? 'none'],
 		].filter(n => n != null).join(' ')}
 			 style={{top: `${props.yBegin}px`, height}}>

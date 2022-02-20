@@ -92,6 +92,8 @@
   border-color: var(--accent);
   color: var(--accent);
 
+  transition: background-color $animation-time linear;
+
   padding: 0.5rem;
 
   > .sessionCourse {
@@ -121,5 +123,8 @@
   > .sessionCourse {
     display: inline-block;
   }
+}
 
+.sessionCardFilled {
+  background: var(--accent-light);
 }

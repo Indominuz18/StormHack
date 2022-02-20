@@ -11,6 +11,7 @@ namespace AssignmentCard {
 	export interface Props {
 		assignment: Assignment;
 		timeFormatter: TimeFormatter;
+		onClick?: React.EventHandler<React.MouseEvent<HTMLDivElement>>;
 	}
 }
 
@@ -24,7 +25,10 @@ function AssignmentCard(props: AssignmentCard.Props) {
 	const dueString = `Due: ${dueTime}, ${dueDate} ${dueDayOfWeek}`;
 
 	return (
-		<div className={[Styles.card, Accents[assignment.color ?? 'none']].join(' ')}>
+		<div onClick={props.onClick} className={[
+			Styles.card,
+			Accents[assignment.color ?? 'none'],
+			props.onClick ? Styles.clickable : null].filter(n => n != null).join(' ')}>
 			<div className={Styles.course}>{assignment.course}</div>
 			<div className={Styles.cardBody}>
 				<div className={Styles.name}>{assignment.name}</div>
