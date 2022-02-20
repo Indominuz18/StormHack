@@ -25,6 +25,7 @@ $padding: 1rem;
 
 .info {
   color: var(--accent);
+  margin-bottom: 1em;
 
   .course {
     font-size: 0.85em;
@@ -39,4 +40,15 @@ $padding: 1rem;
   .due {
 
   }
+}
+
+.sessionCardTitle {
+  color: var(--accent);
+  font-size: 1.25em;
+  margin-bottom: 1em;
+}
+
+.sessionCardDates {
+  color: var(--accent);
+  font-size: 0.9em;
 }

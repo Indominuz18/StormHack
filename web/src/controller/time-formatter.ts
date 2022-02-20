@@ -14,6 +14,15 @@ export interface TimeFormatter {
 	formatHourMinute(hour: number, minute: number): string;
 
 	/**
+	 * Formats an hour and minute range between two points in time.
+	 * @param startHour The starting hour.
+	 * @param startMinute The starting minute.
+	 * @param endHour The ending hour.
+	 * @param endMinute The ending minute.
+	 */
+	formatHourMinuteRange(startHour: number, startMinute: number, endHour: number, endMinute: number): string;
+
+	/**
 	 * Formats the short form of the day of the week.
 	 * @param dayOfWeek The day of the week (0-6).
 	 */
@@ -45,7 +54,10 @@ abstract class AbstractTimeFormatter implements TimeFormatter {
 	}
 
 	abstract formatHour(hour: number): string;
+
 	abstract formatHourMinute(hour: number, minute: number): string;
+
+	abstract formatHourMinuteRange(startHour: number, startMinute: number, endHour: number, endMinute: number): string;
 }
 
 export class TimeFormatter24 extends AbstractTimeFormatter {
@@ -55,6 +67,10 @@ export class TimeFormatter24 extends AbstractTimeFormatter {
 
 	formatHourMinute(hour: number, minute: number): string {
 		return `${hour.toString().padStart(2, '0')}:${minute.toString().padStart(2, '0')}`
+	}
+
+	formatHourMinuteRange(startHour: number, startMinute: number, endHour: number, endMinute: number): string {
+		return `${this.formatHourMinute(startHour, startMinute)}-${this.formatHourMinute(endHour, endMinute)}`;
 	}
 }
 
@@ -72,5 +88,16 @@ export class TimeFormatter12 extends AbstractTimeFormatter {
 	formatHourMinute(hour: number, minute: number): string {
 		const [hour12, meridian] = this._formatHourParts(hour);
 		return `${hour12}:${minute.toString().padStart(2, '0')} ${meridian}`;
+	}
+
+	formatHourMinuteRange(startHour: number, startMinute: number, endHour: number, endMinute: number): string {
+		const [startHour12, startMeridian] = this._formatHourParts(startHour);
+		const [endHour12, endMeridian] = this._formatHourParts(endHour);
+
+		if (startMeridian === endMeridian) {
+			return `${startHour12}:${startMinute}-${endHour12}:${endMinute} ${startMeridian}`;
+		}
+
+		return `${startHour12}:${startMinute} ${startMeridian}-${endHour12}:${endMinute} ${endMeridian}`;
 	}
 }
