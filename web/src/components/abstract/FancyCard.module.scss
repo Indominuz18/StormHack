@@ -1,0 +1,30 @@
+@import "$app/_vars.scss";
+
+$padding: 1rem;
+
+.card {
+  border: var(--accent) 2px solid;
+  border-radius: $medium-border-radius;
+  background: white;
+}
+
+.cardBody {
+  padding: $padding;
+}
+
+.title {
+  font-size: 0.8em;
+  padding-left: $padding;
+
+  color: #fff;
+  background: var(--accent);
+}
+
+.clickable {
+  transition: background-color $animation-time linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--accent-light);
+  }
+}
