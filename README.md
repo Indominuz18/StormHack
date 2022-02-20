@@ -14,7 +14,7 @@ make
 ```
 
 ## Screenshots
-TODO
+![image](https://user-images.githubusercontent.com/32112321/154837096-111f1263-e49b-4209-bcbc-1914099b44cb.png)
 
 ## Demo
-TODO
+https://deadline-fighter.netlify.app/
