@@ -1,0 +1,17 @@
+@import "_vars";
+@mixin accent($color) {
+  --accent: #{$color};
+  --accent-light: #{lighten($color, 0.3)};
+}
+
+.none {
+  @include accent(#000);
+}
+
+.mint {
+  @include accent($accent-mint);
+}
+
+.lavender {
+  @include accent($accent-lavender);
+}

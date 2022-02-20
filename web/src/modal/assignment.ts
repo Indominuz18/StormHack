@@ -1,3 +1,5 @@
+import {Accent} from "$modal/accents";
+
 /**
  * Modal of an Assignment.
  */
@@ -6,6 +8,7 @@ export interface Assignment {
 	course: string
 	name: string
 	dueDate: string
+	color?: Accent
 }
 
 export type AssignmentWithoutID = Omit<Assignment, 'id'>

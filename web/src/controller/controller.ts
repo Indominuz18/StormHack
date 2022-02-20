@@ -5,6 +5,7 @@ import {User} from "$modal/user";
 import {API} from "$app/controller/api";
 import {resultify} from "$app/util";
 import {TimeFormatter, TimeFormatter12, TimeFormatter24} from "$app/controller/time-formatter";
+import {Accent} from "$modal/accents";
 
 /**
  * Controller is the main controller for the application.
@@ -15,10 +16,12 @@ export default class Controller {
 	public readonly config: ControllerConfig;
 	public readonly me?: User;
 	public readonly timeformatter: TimeFormatter;
+	public readonly defaultAccent: Accent;
 
 	constructor(api: API, config: ControllerConfig) {
 		this.api = api;
 		this.config = config;
+		this.defaultAccent = Accent.Mint;
 		this.timeformatter = this.is24Hour() ?
 			new TimeFormatter24() :
 			new TimeFormatter12();

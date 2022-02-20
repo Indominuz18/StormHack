@@ -5,6 +5,7 @@ import {Assignment} from "$modal/assignment";
 import {TimeFormatter} from "$app/controller/time-formatter";
 
 import Styles from "./AssignmentCard.module.scss";
+import Accents from "$app/accents.module.scss";
 
 namespace AssignmentCard {
 	export interface Props {
@@ -23,7 +24,7 @@ function AssignmentCard(props: AssignmentCard.Props) {
 	const dueString = `Due: ${dueTime}, ${dueDate} ${dueDayOfWeek}`;
 
 	return (
-		<div className={Styles.card}>
+		<div className={[Styles.card, Accents[assignment.color ?? 'none']].join(' ')}>
 			<div className={Styles.course}>{assignment.course}</div>
 			<div className={Styles.cardBody}>
 				<div className={Styles.name}>{assignment.name}</div>
