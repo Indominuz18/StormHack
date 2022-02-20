@@ -5,7 +5,6 @@ import {Assignment} from "$modal/assignment";
 import {TimeFormatter} from "$app/controller/time-formatter";
 
 import Styles from "./AssignmentCard.module.scss";
-import Accents from "$app/accents.module.scss";
 import FancyCard from "$app/components/abstract/FancyCard";
 
 namespace AssignmentCard {

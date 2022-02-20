@@ -1,10 +1,9 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 
 import Controller from "$app/controller/controller";
 import {useAsync} from "$app/react-async-hook";
 import ErrorCard from "$app/components/misc/ErrorCard";
 import {Assignment} from "$modal/assignment";
-import AssignmentCard from "$app/components/calendar/AssignmentCard";
 
 import Styles from "./AssignmentPlanner.module.scss";
 import Accents from "$app/accents.module.scss";

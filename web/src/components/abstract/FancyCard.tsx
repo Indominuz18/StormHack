@@ -1,9 +1,5 @@
 import React, {PropsWithChildren} from 'react';
 
-import {Assignment} from "$modal/assignment";
-
-import {TimeFormatter} from "$app/controller/time-formatter";
-
 import Styles from "./FancyCard.module.scss";
 import Accents from "$app/accents.module.scss";
 import {Accent} from "$modal/accents";

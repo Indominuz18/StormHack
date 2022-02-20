@@ -4,7 +4,7 @@ import WeekCalendar from "$app/components/calendar/WeekCalendar";
 
 import Styles from "./Calendar.module.scss";
 import AssignmentList from "$app/components/calendar/AssignmentList";
-import {Assignment, AssignmentID} from "$modal/assignment";
+import {Assignment} from "$modal/assignment";
 import AssignmentPlanner from "$app/components/calendar/AssignmentPlanner";
 
 namespace Calendar {

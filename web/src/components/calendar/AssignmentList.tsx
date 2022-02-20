@@ -1,9 +1,9 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 
 import Controller from "$app/controller/controller";
 import {useAsync} from "$app/react-async-hook";
 import ErrorCard from "$app/components/misc/ErrorCard";
-import {Assignment, AssignmentID} from "$modal/assignment";
+import {Assignment} from "$modal/assignment";
 import AssignmentCard from "$app/components/calendar/AssignmentCard";
 
 import Styles from "./AssignmentList.module.scss";

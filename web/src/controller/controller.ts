@@ -50,9 +50,9 @@ export default class Controller {
 	}
 }
 
-function log(message: string, ...args: any) {
-	console.log(`[controller] ${message}`, ...args);
-}
+// function log(message: string, ...args: any) {
+// 	console.log(`[controller] ${message}`, ...args);
+// }
 
 function err(message: string, ...args: any) {
 	console.error(`[controller] ${message}`, ...args);

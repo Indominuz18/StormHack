@@ -1,4 +1,4 @@
-import React, {PropsWithChildren} from 'react';
+import React from 'react';
 
 import Styles from './WeekCalendar.module.scss';
 import Controller from "$app/controller/controller";
