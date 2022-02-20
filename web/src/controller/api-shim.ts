@@ -241,7 +241,7 @@ export class LocalstorageAPI implements API {
 				const sessionStart = Date.parse(session.startDate)
 				const sessionEnd = Date.parse(session.endDate);
 
-				if (sessionStart > fromMillis && sessionStart < toMillis) {
+				if (sessionStart > fromMillis && sessionStart < toMillis || sessionEnd > fromMillis && sessionEnd < toMillis) {
 					matching.push(session);
 				}
 			})
