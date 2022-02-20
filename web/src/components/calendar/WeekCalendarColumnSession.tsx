@@ -43,7 +43,7 @@ function WeekCalendarColumnSession(props: WeekCalendarColumnSession.Props) {
 			height <= 50 ? Styles.sessionCardSmall : null,
 			Accents[assignment.color ?? 'none'],
 		].filter(n => n != null).join(' ')}
-			 style={{transform: `translateY(${props.yBegin}px)`, height}}>
+			 style={{top: `${props.yBegin}px`, height}}>
 			<div className={Styles.sessionCourse}>{assignment.course}</div>
 			<div className={Styles.sessionTitle}>{props.session.title}</div>
 		</div>

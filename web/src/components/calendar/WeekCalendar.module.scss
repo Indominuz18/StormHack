@@ -83,6 +83,10 @@
 }
 
 .sessionCard {
+  position: absolute;
+  left: 0;
+  right: 0;
+
   border: $color-black-medium 2px solid;
   border-radius: $large-card-padding;
   border-color: var(--accent);
