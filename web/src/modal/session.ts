@@ -5,6 +5,7 @@ import {AssignmentID} from "$modal/assignment";
  */
 export interface Session {
 	assignment: AssignmentID
-	startDate: Date
-	endDate: Date
+	startDate: string
+	endDate: string
+	title: string
 }

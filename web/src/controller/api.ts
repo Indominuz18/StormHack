@@ -82,6 +82,15 @@ export interface API {
 	getAssignmentsForDateRange(range: DateRange): Promise<Readonly<Assignment[]>>
 
 	/**
+	 * Gets a list of sessions that take place over the provided date range.
+	 *
+	 * @param range The date range.
+	 *
+	 * @endpoint GET /api/v1/sessions/for-range?from=${date}&to=${date}
+	 */
+	getSessionsForDateRange(range: DateRange): Promise<Readonly<Session[]>>
+
+	/**
 	 * Gets the work sessions scheduled for the assignment.
 	 *
 	 * @param id The assignment ID.

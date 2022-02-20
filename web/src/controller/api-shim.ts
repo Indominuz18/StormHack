@@ -158,7 +158,7 @@ export class LocalstorageAPI implements API {
 	}
 
 	async getAssignmentsForDateRange(range: DateRange): Promise<Readonly<Assignment[]>> {
-		if (this.currentUser === null) throw  new Error('not logged in');
+		if (this.currentUser === null) throw new Error('not logged in');
 
 		const fromMillis = range.from.getTime();
 		const toMillis = range.to.getTime();
@@ -200,12 +200,23 @@ export class LocalstorageAPI implements API {
 
 	async updateSessions(id: AssignmentID, sessions: Session[]): Promise<Readonly<Session[]>> {
 		if (this.currentUser === null) throw new Error('not logged in');
-		if (!this.currentUser.sessions.has(id)) throw new Error(`no assignment with id ${id}`);
+		if (!this.currentUser.assignments.has(id)) throw new Error(`no assignment with id ${id}`);
 
-		this.currentUser.sessions.set(id, [...sessions]);
+		let copiedSessions: Session[] = [];
+		for (const session of sessions) {
+			if (isNaN(Date.parse(session.startDate))) throw new Error(`session start date invalid: ${session.startDate}`);
+			if (isNaN(Date.parse(session.endDate))) throw new Error(`session end date invalid: ${session.endDate}`);
+			if (session.title === '') throw new Error(`session is missing title`);
+			copiedSessions.push({
+				...session,
+				assignment: id,
+			})
+		}
+
+		this.currentUser.sessions.set(id, copiedSessions);
 		this._save();
 
-		return this._frozen([...sessions]);
+		return this._frozen([...copiedSessions]);
 	}
 
 	async getLoginUserInfo(): Promise<User> {
@@ -216,6 +227,30 @@ export class LocalstorageAPI implements API {
 			id: this.currentUser.id,
 		};
 	}
+
+	async getSessionsForDateRange(range: DateRange): Promise<Readonly<Session[]>> {
+		if (this.currentUser === null) throw  new Error('not logged in');
+
+		const fromMillis = range.from.getTime();
+		const toMillis = range.to.getTime();
+
+		// Iterate all sessions.
+		const matching: Session[] = [];
+		this.currentUser.sessions.forEach(sessions => {
+			sessions.forEach(session => {
+				const sessionStart = Date.parse(session.startDate)
+				const sessionEnd = Date.parse(session.endDate);
+
+				if (sessionStart > fromMillis && sessionStart < toMillis) {
+					matching.push(session);
+				}
+			})
+		});
+
+		// Return the matching ones.
+		return matching;
+	}
+
 
 }
 
