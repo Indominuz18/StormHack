@@ -42,6 +42,10 @@ $padding: 1rem;
   }
 }
 
+.sessionCard {
+  margin-bottom: 1em;
+}
+
 .sessionCardTitle {
   color: var(--accent);
   font-size: 1.25em;
@@ -51,4 +55,12 @@ $padding: 1rem;
 .sessionCardDates {
   color: var(--accent);
   font-size: 0.9em;
+}
+
+.newSessionButton {
+  cursor: not-allowed;
+  font-size: 2em;
+  line-height: 100%;
+  text-align: center;
+  color: var(--accent);
 }
