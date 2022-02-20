@@ -1,0 +1,77 @@
+@import "$app/_vars.scss";
+
+.container {
+  display: flex;
+  min-height: 100%;
+  width: 100%;
+
+  > .dayGrid {
+    flex: 1 0 auto;
+
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    min-height: 100%;
+  }
+
+  padding-bottom: 1em;
+}
+
+.columnTitle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  font-weight: bold;
+  color: $color-black-medium;
+  height: 2em;
+}
+
+.hours {
+  font-size: 0.9rem;
+  text-align: right;
+  padding: 0 $calendar-hours-padding;
+  color: $color-black-light;
+
+  .columnBody > * {
+    display: flex;
+    align-items: center;
+    justify-content: end;
+  }
+}
+
+.day {
+  display: flex;
+  flex-direction: column;
+
+  > .columnBody {
+    flex: 1 0 auto;
+    border: $color-black-light 1px solid;
+  }
+
+  // For the first day, set a border radius.
+  &:first-child {
+    > .columnBody {
+      border-top-left-radius: $calendar-border-radius;
+      border-bottom-left-radius: $calendar-border-radius;
+    }
+  }
+
+  // For the last day, set a border radius.
+  &:last-child {
+    > .columnBody {
+      border-top-right-radius: $calendar-border-radius;
+      border-bottom-right-radius: $calendar-border-radius;
+    }
+  }
+
+  // For all the middle days, remove the left border.
+  &:not(:first-child) {
+    > .columnBody {
+      border-left: none;
+    }
+  }
+}
+
+.columnBody > * {
+  min-height: var(--height);
+}

@@ -1,0 +1,21 @@
+@import "$app/_vars.scss";
+
+.errorCard {
+  flex: 1 0 auto;
+  min-width: 100%;
+
+  border-radius: $large-border-radius;
+  padding: $large-card-padding / 2;
+
+  background-color: $color-error-light;
+  border: $color-error-medium 1px solid;
+}
+
+.name {
+  color: red;
+  text-align: center;
+}
+
+.message {
+  color: #000a;
+}

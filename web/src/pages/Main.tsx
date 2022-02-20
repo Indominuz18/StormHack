@@ -1,10 +1,17 @@
 import React from 'react';
-import './Landing.module.scss';
+import Controller from "$app/controller/controller";
+import Calendar from "$app/pages/Calendar";
 
-export default function Main() {
+namespace Main {
+	export interface Props {
+		controller: Controller
+	}
+}
+
+function Main(props: Main.Props) {
 	return (
-		<div className="App">
-			Main View
-		</div>
+		<Calendar {...props}/>
 	);
 }
+
+export default Main;

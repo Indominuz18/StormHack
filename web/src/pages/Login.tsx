@@ -8,6 +8,7 @@ import Centered from "$app/components/layout/Centered";
 import Styles from './Login.module.scss';
 import Form from "$app/components/input/Form";
 import FormSubmit from "$app/components/input/FormSubmit";
+import {resultify} from "$app/util";
 
 namespace Login {
 	export interface Props {
@@ -27,9 +28,9 @@ function Login(props: Login.Props) {
 
 		// Log in or register.
 		if (evt.action === 'login') {
-			result = await controller.api.login(username, password);
+			result = await resultify(controller.api.login(username, password));
 		} else if (evt.action === 'register') {
-			result = await controller.api.register(username, password);
+			result = await resultify(controller.api.register(username, password));
 		} else {
 			throw new Error(`unknown action: ${evt.action}`);
 		}
