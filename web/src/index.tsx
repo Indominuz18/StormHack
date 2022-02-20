@@ -7,6 +7,7 @@ import {Config} from "$app/config";
 import {LocalstorageAPI} from "$app/controller/api-shim";
 import Controller, {ControllerConfig} from "$app/controller/controller";
 import {API} from "$app/controller/api";
+import {DemoAPI} from "$app/controller/api-shim-demo";
 
 import reportWebVitals from './reportWebVitals';
 
@@ -21,10 +22,14 @@ import './index.scss';
  * Creates the controller that talks to the API.
  * @param config The application config.
  */
-function createAPIController(config: ControllerConfig): API {
+async function createAPIController(config: ControllerConfig): Promise<API> {
 	const apiServer = new URL(Config.url.api);
 	if (apiServer.protocol === 'shim:') {
 		return new LocalstorageAPI(localStorage, apiServer.pathname.replaceAll(/^\/+/g, ''));
+	} else if (apiServer.protocol === 'shim+demo:') {
+		let demo = new DemoAPI();
+		await demo._demo();
+		return demo;
 	}
 
 	// TODO(eth-p): XHR/fetch-based API implementation.
@@ -34,8 +39,8 @@ function createAPIController(config: ControllerConfig): API {
 /**
  * Creates the main application controller.
  */
-function createAppController(config: ControllerConfig): Controller {
-	const apiController = createAPIController(config);
+async function createAppController(config: ControllerConfig): Promise<Controller> {
+	const apiController = await createAPIController(config);
 	return new Controller(apiController, config);
 }
 
@@ -43,10 +48,8 @@ function createAppController(config: ControllerConfig): Controller {
 // Start React app.
 // ---------------------------------------------------------------------------------------------------------------------
 
-try {
 
-	// Create the application controller.
-	const controller = createAppController(Config);
+createAppController(Config).then(controller => {
 
 	// Add debug variables to global scope.
 	if (process.env.NODE_ENV !== 'production') {
@@ -64,7 +67,7 @@ try {
 		document.getElementById('root')
 	);
 
-} catch (ex) {
+}).catch(ex => {
 	console.error(ex);
 
 	let message = (ex as any).toString();
@@ -87,7 +90,7 @@ try {
 	errContainer.appendChild(errMessage);
 	errContainer.appendChild(errStack);
 	document.getElementById('root')!.appendChild(errContainer);
-}
+});
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))
