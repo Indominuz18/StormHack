@@ -1,6 +1,7 @@
 import {LocalstorageAPI} from "$app/controller/api-shim";
 import {Accent} from "$modal/accents";
 import {Session} from "$modal/session";
+import {LoginSession, Password} from "$app/controller/api";
 
 const GENERATOR = {
 	ACCENTS: [Accent.Mint, Accent.Lavender, Accent.Pyro, Accent.Sea, Accent.Love, Accent.Rose],

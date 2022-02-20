@@ -3,14 +3,14 @@ import Styles from './WeekCalendar.module.scss';
 import Controller from "$app/controller/controller";
 import {TimeFormatter} from "$app/controller/time-formatter";
 import {useAsync} from "$app/react-async-hook";
-import {Assignment} from "$modal/assignment";
+import {AssignmentID} from "$modal/assignment";
 import ErrorCard from "$app/components/misc/ErrorCard";
-import AssignmentCard from "$app/components/calendar/AssignmentCard";
 import {Session} from "$modal/session";
 import WeekCalendarColumnSession from "$app/components/calendar/WeekCalendarColumnSession";
 
 namespace WeekCalendarColumn {
 	export interface Props {
+		highlightAssignments: [AssignmentID];
 		controller: Controller;
 		day: Date;
 		timeFormatter: TimeFormatter;
@@ -47,6 +47,7 @@ function WeekCalendarColumn(props: WeekCalendarColumn.Props) {
 				const endOffsetMillis = endDate.getTime() - props.day.getTime();
 				const endOffsetHours = endOffsetMillis / 1000 / 60 / 60;
 				return <WeekCalendarColumnSession
+					filled={props.highlightAssignments.includes(a.assignment)}
 					controller={controller}
 					yBegin={startOffsetHours * props.cellHeight}
 					yEnd={Math.min(24 * props.cellHeight, endOffsetHours * props.cellHeight)}

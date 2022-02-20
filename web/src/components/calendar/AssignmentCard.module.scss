@@ -27,3 +27,12 @@ $padding: 1rem;
 .due {
 
 }
+
+.clickable {
+  transition: background-color $animation-time linear;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--accent-light);
+  }
+}

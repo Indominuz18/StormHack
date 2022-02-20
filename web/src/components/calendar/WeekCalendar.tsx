@@ -4,12 +4,14 @@ import Styles from './WeekCalendar.module.scss';
 import Controller from "$app/controller/controller";
 import WeekCalendarHours from "$app/components/calendar/WeekCalendarHours";
 import WeekCalendarColumn from "$app/components/calendar/WeekCalendarColumn";
+import {AssignmentID} from "$modal/assignment";
 
 namespace WeekCalendar {
 	export interface Props {
 		controller: Controller;
 		start: Date;
 		cellHeight: number;
+		highlightAssignments: [AssignmentID];
 	}
 }
 
