@@ -1,0 +1,42 @@
+@import "$app/_vars.scss";
+
+$padding: 1rem;
+
+.header {
+  background: $color-main;
+  color: #fff;
+
+  font-size: 0.85rem;
+  display: flex;
+  padding: $padding/3 $padding;
+
+  > *:first-child {
+    flex: 1 0 auto;
+  }
+}
+
+.returnButton {
+  color: #ccc;
+}
+
+.content {
+  padding: $padding/2 $padding;
+}
+
+.info {
+  color: var(--accent);
+
+  .course {
+    font-size: 0.85em;
+  }
+
+  .name {
+    font-size: 1.5em;
+    line-height: 1.15em;
+    margin-bottom: 0.4rem;
+  }
+
+  .due {
+
+  }
+}
