@@ -3,9 +3,7 @@
 $padding: 1rem;
 
 .card {
-  --color: #{$accent-mint};
-
-  border: var(--color) 2px solid;
+  border: var(--accent) 2px solid;
   border-radius: $medium-border-radius;
   background: white;
 }
@@ -19,7 +17,7 @@ $padding: 1rem;
   padding-left: $padding;
 
   color: #fff;
-  background: var(--color);
+  background: var(--accent);
 }
 
 .name {

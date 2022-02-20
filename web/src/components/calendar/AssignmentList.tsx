@@ -29,7 +29,6 @@ function AssignmentList(props: AssignmentList.Props) {
 	} else if (result.error) {
 		assignmentsContents = <ErrorCard error={result.error}/>;
 	} else if (result.value != null) {
-		console.log(result.value);
 		assignmentsContents = result.value
 			.map(a => <AssignmentCard timeFormatter={controller.timeformatter} key={a.id} assignment={a}/>);
 	}

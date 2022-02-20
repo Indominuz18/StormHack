@@ -33,6 +33,7 @@
   color: $color-black-light;
 
   .columnBody > * {
+    min-height: var(--height);
     display: flex;
     align-items: center;
     justify-content: end;
@@ -44,6 +45,7 @@
   flex-direction: column;
 
   > .columnBody {
+    position: relative;
     flex: 1 0 auto;
     border: $color-black-light 1px solid;
   }
@@ -72,6 +74,27 @@
   }
 }
 
-.columnBody > * {
-  min-height: var(--height);
+.sessionsOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+.sessionCard {
+  border: $color-black-medium 2px solid;
+  border-radius: $large-card-padding;
+  border-color: var(--accent);
+  color: var(--accent);
+
+  padding: 0.5rem;
+
+  > .sessionCourse {
+    font-size: 0.85em;
+  }
+
+  > .sessionTitle {
+
+  }
 }
