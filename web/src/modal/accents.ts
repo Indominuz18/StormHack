@@ -6,5 +6,7 @@ export enum Accent {
 	Lavender = 'lavender',
 	Pyro = 'pyro',
 	Sea = 'sea',
+	Love = 'love',
+	Rose = 'rose',
 }
 
