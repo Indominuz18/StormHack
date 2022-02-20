@@ -6,6 +6,7 @@ import Controller from "$app/controller/controller";
 
 import Login from "$app/pages/Login";
 import Main from "$app/pages/Main";
+import Calendar from "$app/pages/Calendar";
 
 export interface AppProps {
 	controller: Controller
@@ -31,7 +32,7 @@ export default function App(props: AppProps) {
 	return (
 		<BrowserRouter>
 			<Routes>
-				<Route path="/" element={<Main/>}/>
+				<Route path="/" element={<Main {...props}/>}/>
 			</Routes>
 		</BrowserRouter>
 	);

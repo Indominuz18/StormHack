@@ -1,0 +1,31 @@
+@import "$app/_vars.scss";
+
+$padding: 1rem;
+
+.card {
+  --color: #{$accent-mint};
+
+  border: var(--color) 2px solid;
+  border-radius: $medium-border-radius;
+  background: white;
+}
+
+.cardBody {
+  padding: $padding;
+}
+
+.course {
+  font-size: 0.8em;
+  padding-left: $padding;
+
+  color: #fff;
+  background: var(--color);
+}
+
+.name {
+  font-size: 1.2em;
+}
+
+.due {
+
+}

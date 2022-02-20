@@ -90,29 +90,27 @@ export class LocalstorageAPI implements API {
 		window.history.go(0);
 	}
 
-	login(username: string, password: Password): Result<LoginSession> {
-		if (username === '') return {error: new Error("username must not be empty")};
-		if (password === '') return {error: new Error("password must not be empty")};
+	async login(username: string, password: Password): Promise<LoginSession> {
+		if (username === '') throw new Error("username must not be empty");
+		if (password === '') throw new Error("password must not be empty");
 
 		const user = this.users.get(username);
 		if (user == null || user.password !== password) {
-			return {error: new Error("invalid username or password")};
+			throw new Error("invalid username or password");
 		}
 
 		// Login successful.
 		this.currentUser = user;
 		this._save();
-		return {value: `shim-${username}`};
+		return `shim-${username}`;
 	}
 
-	register(username: string, password: Password): Result<LoginSession> {
-		if (username === '') return {error: new Error("username must not be empty")};
-		if (password === '') return {error: new Error("password must not be empty")};
+	async register(username: string, password: Password): Promise<LoginSession> {
+		if (username === '') throw new Error("username must not be empty");
+		if (password === '') throw new Error("password must not be empty");
 
 		const user = this.users.get(username);
-		if (user != null) {
-			return {error: new Error("user already exists")};
-		}
+		if (user != null) throw new Error("user already exists");
 
 		// Create the user.
 		const newUser = {
@@ -129,40 +127,38 @@ export class LocalstorageAPI implements API {
 		// Login successful.
 		this.currentUser = newUser;
 		this._save();
-		return {value: `shim-${username}`};
+		return `shim-${username}`;
 	}
 
-	logout(): Result<void> {
+	async logout(): Promise<void> {
 		this.currentUser = null;
 		this._save();
-		return {};
 	}
 
-	createAssignment(assignment: AssignmentWithoutID): Result<Readonly<Assignment>> {
-		if (this.currentUser === null) return {error: new Error('not logged in')};
+	async createAssignment(assignment: AssignmentWithoutID): Promise<Readonly<Assignment>> {
+		if (this.currentUser === null) throw new Error('not logged in');
+		if (isNaN(new Date(assignment.dueDate).getTime())) throw new Error(`invalid due date: ${assignment.dueDate}`);
 
 		const id = `${++this.assignmentsCounter}`;
 		const created = this._frozen({...assignment, id});
 		this.currentUser.assignments.set(id, created);
 		this._save();
-
-		// Return a copy.
-		return {value: created};
+		return created;
 	}
 
-	getAssignmentById(id: AssignmentID): Result<Readonly<Assignment>> {
-		if (this.currentUser === null) return {error: new Error('not logged in')};
+	async getAssignmentById(id: AssignmentID): Promise<Readonly<Assignment>> {
+		if (this.currentUser === null) throw new Error('not logged in');
 
 		const assignment = this.currentUser.assignments.get(id);
 		if (assignment === undefined) {
-			return {error: new Error(`no assignment with id ${id}`)}
+			throw new Error(`no assignment with id ${id}`);
 		}
 
-		return {value: assignment};
+		return assignment
 	}
 
-	getAssignmentsForDateRange(range: DateRange): Result<Readonly<Assignment[]>> {
-		if (this.currentUser === null) return {error: new Error('not logged in')};
+	async getAssignmentsForDateRange(range: DateRange): Promise<Readonly<Assignment[]>> {
+		if (this.currentUser === null) throw  new Error('not logged in');
 
 		const fromMillis = range.from.getTime();
 		const toMillis = range.to.getTime();
@@ -177,56 +173,47 @@ export class LocalstorageAPI implements API {
 		})
 
 		// Return the matching ones.
-		return {value: matching};
+		return matching;
 	}
 
-	getSessionsOfAssignment(id: AssignmentID): Result<Readonly<Session[]>> {
-		if (this.currentUser === null) return {error: new Error('not logged in')};
+	async getSessionsOfAssignment(id: AssignmentID): Promise<Readonly<Session[]>> {
+		if (this.currentUser === null) throw new Error('not logged in');
 
 		const sessions = this.currentUser.sessions.get(id);
-		if (sessions === undefined) {
-			return {error: new Error(`no assignment with id ${id}`)};
-		}
+		if (sessions === undefined) throw new Error(`no assignment with id ${id}`);
 
-		return {value: sessions};
+		return sessions;
 	}
 
-	updateAssignment(id: AssignmentID, assignment: AssignmentWithoutID): Result<Readonly<Assignment>> {
-		if (this.currentUser === null) return {error: new Error('not logged in')};
-
-		if (!this.currentUser.assignments.has(id)) {
-			return {error: new Error(`no assignment with id ${id}`)};
-		}
+	async updateAssignment(id: AssignmentID, assignment: AssignmentWithoutID): Promise<Readonly<Assignment>> {
+		if (this.currentUser === null) throw new Error('not logged in');
+		if (!this.currentUser.assignments.has(id)) throw new Error(`no assignment with id ${id}`);
+		if (isNaN(new Date(assignment.dueDate).getTime())) throw new Error(`invalid due date: ${assignment.dueDate}`);
 
 		const old = this.currentUser.assignments.get(id)!;
 		const updated = this._frozen({...old, ...assignment});
 		this.currentUser.assignments.set(id, updated);
 		this._save();
 
-		return {value: updated};
+		return updated;
 	}
 
-	updateSessions(id: AssignmentID, sessions: Session[]): Result<Readonly<Session[]>> {
-		if (this.currentUser === null) return {error: new Error('not logged in')};
-
-		if (!this.currentUser.sessions.has(id)) {
-			return {error: new Error(`no assignment with id ${id}`)};
-		}
+	async updateSessions(id: AssignmentID, sessions: Session[]): Promise<Readonly<Session[]>> {
+		if (this.currentUser === null) throw new Error('not logged in');
+		if (!this.currentUser.sessions.has(id)) throw new Error(`no assignment with id ${id}`);
 
 		this.currentUser.sessions.set(id, [...sessions]);
 		this._save();
 
-		return {value: this._frozen([...sessions])};
+		return this._frozen([...sessions]);
 	}
 
-	getLoginUserInfo(): Result<User> {
-		if (this.currentUser === null) return {error: new Error('not logged in')};
+	async getLoginUserInfo(): Promise<User> {
+		if (this.currentUser === null) throw new Error('not logged in');
 
 		return {
-			value: {
-				...this.currentUser.info,
-				id: this.currentUser.id,
-			}
+			...this.currentUser.info,
+			id: this.currentUser.id,
 		};
 	}
 

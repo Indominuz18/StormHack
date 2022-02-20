@@ -3,6 +3,8 @@ import type {Config} from "$app/config";
 import {User} from "$modal/user";
 
 import {API} from "$app/controller/api";
+import {resultify} from "$app/util";
+import {TimeFormatter, TimeFormatter12, TimeFormatter24} from "$app/controller/time-formatter";
 
 /**
  * Controller is the main controller for the application.
@@ -12,10 +14,21 @@ export default class Controller {
 	public readonly api: API;
 	public readonly config: ControllerConfig;
 	public readonly me?: User;
+	public readonly timeformatter: TimeFormatter;
 
 	constructor(api: API, config: ControllerConfig) {
 		this.api = api;
 		this.config = config;
+		this.timeformatter = this.is24Hour() ?
+			new TimeFormatter24() :
+			new TimeFormatter12();
+	}
+
+	/**
+	 * Returns true if the user prefers 24-hour time.
+	 */
+	is24Hour(): boolean {
+		return false;
 	}
 
 	async isLoggedIn(): Promise<boolean> {
@@ -23,7 +36,7 @@ export default class Controller {
 			return true;
 		}
 
-		const loginUserInfo = await this.api.getLoginUserInfo();
+		const loginUserInfo = await resultify(this.api.getLoginUserInfo());
 		if (loginUserInfo.error != null) {
 			err("unable to get login user info", loginUserInfo.error);
 			return false;

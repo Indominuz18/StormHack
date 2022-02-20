@@ -1,0 +1,11 @@
+@import "$app/_vars.scss";
+
+.calendarPage {
+  display: grid;
+  grid-template-columns: 1fr 6fr;
+}
+
+.assignments {
+  background: #efefef;
+  padding: $large-card-padding;
+}

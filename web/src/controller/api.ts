@@ -15,7 +15,7 @@ export interface API {
 	 *
 	 * @endpoint POST /api/v1/login
 	 */
-	login(username: string, password: Password): Result<LoginSession>;
+	login(username: string, password: Password): Promise<LoginSession>;
 
 	/**
 	 * Attempts to register a new user on the server.
@@ -26,21 +26,21 @@ export interface API {
 	 *
 	 * @endpoint POST /api/v1/register
 	 */
-	register(username: string, password: Password): Result<LoginSession>;
+	register(username: string, password: Password): Promise<LoginSession>;
 
 	/**
 	 * Attempts to log out from the server.
 	 *
 	 * @endpoint POST /api/v1/logout
 	 */
-	logout(): Result<void>;
+	logout(): Promise<void>;
 
 	/**
 	 * Gets the currently-logged-in user's info.
 	 *
 	 * @endpoint GET /api/v1/me
 	 */
-	getLoginUserInfo(): Result<User>;
+	getLoginUserInfo(): Promise<User>;
 
 	/**
 	 * Gets an assignment by its ID.
@@ -49,7 +49,7 @@ export interface API {
 	 *
 	 * @endpoint GET /api/v1/assignments/:id
 	 */
-	getAssignmentById(id: AssignmentID): Result<Readonly<Assignment>>
+	getAssignmentById(id: AssignmentID): Promise<Readonly<Assignment>>
 
 	/**
 	 * Updates an existing assignment.
@@ -60,7 +60,7 @@ export interface API {
 	 *
 	 * @endpoint PATCH /api/v1/assignments/:id
 	 */
-	updateAssignment(id: AssignmentID, assignment: AssignmentWithoutID): Result<Readonly<Assignment>>
+	updateAssignment(id: AssignmentID, assignment: AssignmentWithoutID): Promise<Readonly<Assignment>>
 
 	/**
 	 * Creates a new assignment.
@@ -70,16 +70,16 @@ export interface API {
 	 *
 	 * @endpoint POST /api/v1/assignments/new
 	 */
-	createAssignment(assignment: AssignmentWithoutID): Result<Readonly<Assignment>>
+	createAssignment(assignment: AssignmentWithoutID): Promise<Readonly<Assignment>>
 
 	/**
 	 * Gets a list of assignments that take place over the provided date range.
 	 *
 	 * @param range The date range.
 	 *
-	 * @endpoint GET /api/v1/assignments/for-range?from=${date}&to=${datE}
+	 * @endpoint GET /api/v1/assignments/for-range?from=${date}&to=${date}
 	 */
-	getAssignmentsForDateRange(range: DateRange): Result<Readonly<Assignment[]>>
+	getAssignmentsForDateRange(range: DateRange): Promise<Readonly<Assignment[]>>
 
 	/**
 	 * Gets the work sessions scheduled for the assignment.
@@ -88,7 +88,7 @@ export interface API {
 	 *
 	 * @endpoint GET /api/v1/assignments/:id/sessions
 	 */
-	getSessionsOfAssignment(id: AssignmentID): Result<Readonly<Session[]>>
+	getSessionsOfAssignment(id: AssignmentID): Promise<Readonly<Session[]>>
 
 	/**
 	 * Gets the work sessions scheduled for the assignment.
@@ -98,7 +98,7 @@ export interface API {
 	 *
 	 * @endpoint PATCH /api/v1/assignments/:id/sessions
 	 */
-	updateSessions(id: AssignmentID, sessions: Session[]): Result<Readonly<Session[]>>
+	updateSessions(id: AssignmentID, sessions: Session[]): Promise<Readonly<Session[]>>
 
 }
 
