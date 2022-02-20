@@ -98,3 +98,24 @@
 
   }
 }
+
+.sessionCardSmall {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  align-items: center;
+
+  > .sessionCourse {
+    margin-right: 0.75ch;
+  }
+
+  > .sessionTitle {
+    flex: 1 0 auto;
+  }
+
+  > .sessionTitle,
+  > .sessionCourse {
+    display: inline-block;
+  }
+
+}

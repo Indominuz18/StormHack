@@ -32,7 +32,10 @@ const GENERATOR = {
 	],
 
 	SESSION_TEMPLATES: [
-		(n: string) => `${n} Work`,
+		(n: string) => `Design`,
+		(n: string) => `Prep`,
+		(n: string) => `Review`,
+		(n: string) => `${n}`,
 	]
 };
 
@@ -80,7 +83,7 @@ export class DemoAPI extends LocalstorageAPI {
 
 		// Create between 1-2 sessions per assignment.
 		for (const assignment of assignments) {
-			let sessionCount = 1 + Math.floor(Math.random() * 2);
+			let sessionCount = 1 + Math.floor(Math.random() * 1);
 			let sessions: Session[] = [];
 
 			const assignmentDue = new Date(assignment.dueDate);
@@ -93,6 +96,7 @@ export class DemoAPI extends LocalstorageAPI {
 					const endDate = new Date(startDate.getTime() + ((1000 * 60 * 30) * Math.floor(1 + Math.random() * 5)));
 
 					if ((await this.getSessionsForDateRange({from: startDate, to: endDate})).length > 1) {
+						console.log("CONFLICT");
 						continue;
 					}
 

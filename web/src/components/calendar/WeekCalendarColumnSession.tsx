@@ -31,14 +31,19 @@ function WeekCalendarColumnSession(props: WeekCalendarColumnSession.Props) {
 		name: ""
 	}
 
-	let assignmentsContents = null;
 	if (result !== useAsync.loading && result.value != null) {
 		assignment = result.value;
 	}
-console.log(assignment);
+
+	// Calculate the height.
+	const height = (props.yEnd - props.yBegin);
 	return (
-		<div className={[Styles.sessionCard, Accents[assignment.color ?? 'none']].join(' ')}
-			 style={{transform:`translateY(${props.yBegin}px)`, height: (props.yEnd - props.yBegin)}}>
+		<div className={[
+			Styles.sessionCard,
+			height <= 50 ? Styles.sessionCardSmall : null,
+			Accents[assignment.color ?? 'none'],
+		].filter(n => n != null).join(' ')}
+			 style={{transform: `translateY(${props.yBegin}px)`, height}}>
 			<div className={Styles.sessionCourse}>{assignment.course}</div>
 			<div className={Styles.sessionTitle}>{props.session.title}</div>
 		</div>
