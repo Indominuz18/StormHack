@@ -23,3 +23,11 @@
 .sea {
   @include accent($accent-sea);
 }
+
+.love {
+  @include accent($accent-love);
+}
+
+.rose {
+  @include accent($accent-rose);
+}
