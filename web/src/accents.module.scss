@@ -15,3 +15,11 @@
 .lavender {
   @include accent($accent-lavender);
 }
+
+.pyro {
+  @include accent($accent-pyro);
+}
+
+.sea {
+  @include accent($accent-sea);
+}

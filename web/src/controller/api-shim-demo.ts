@@ -3,7 +3,7 @@ import {Accent} from "$modal/accents";
 import {Session} from "$modal/session";
 
 const GENERATOR = {
-	ACCENTS: [Accent.Mint, Accent.Lavender],
+	ACCENTS: [Accent.Mint, Accent.Lavender, Accent.Pyro, Accent.Sea],
 
 	COURSE_NAMES: [
 		'HACK',

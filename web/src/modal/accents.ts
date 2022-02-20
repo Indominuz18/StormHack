@@ -4,5 +4,7 @@
 export enum Accent {
 	Mint = 'mint',
 	Lavender = 'lavender',
+	Pyro = 'pyro',
+	Sea = 'sea',
 }
 
