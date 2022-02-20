@@ -56,6 +56,9 @@ function AssignmentPlanner(props: AssignmentPlanner.Props) {
 				</div>
 				<div className={Styles.sessions}>
 					{sessionsElements}
+					<FancyCard
+						accent={assignment.color}
+						className={Styles.newSessionButton}>+</FancyCard>
 				</div>
 			</div>
 		</div>
@@ -71,7 +74,7 @@ function createSessionCard(tf: TimeFormatter, assignment: Assignment, session: S
 	const rangeString = `${tf.formatHourMinuteRange(start.getHours(),start.getMinutes(),end.getHours(),end.getMinutes())}`;
 
 	return (
-		<FancyCard accent={assignment.color} title={assignment.course}>
+		<FancyCard accent={assignment.color} title={assignment.course} className={Styles.sessionCard}>
 			<div className={Styles.sessionCardTitle}>{session.title}</div>
 			<div className={Styles.sessionCardDates}>{rangeString}</div>
 		</FancyCard>

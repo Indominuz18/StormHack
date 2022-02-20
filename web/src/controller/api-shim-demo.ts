@@ -78,7 +78,7 @@ export class DemoAPI extends LocalstorageAPI {
 
 		// Create between 1-2 sessions per assignment.
 		for (const assignment of assignments) {
-			let sessionCount = 1 + Math.floor(Math.random() * 1);
+			let sessionCount = 1 + Math.floor(Math.random() * 2);
 			let sessions: Session[] = [];
 
 			const assignmentDue = new Date(assignment.dueDate);
