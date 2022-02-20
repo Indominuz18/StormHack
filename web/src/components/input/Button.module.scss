@@ -1,8 +1,15 @@
 @import "$app/_vars.scss";
 
-.primaryButton, .linkButton {
+.button {
   cursor: pointer;
+  --button-color: var(--accent);
 
+  &.disabled {
+    cursor: not-allowed;
+  }
+}
+
+.primaryButton, .linkButton {
   &.large {
     padding: $input-button-padding * 2;
   }
@@ -22,4 +29,20 @@
   background: none;
   padding: 0;
   border: none;
+}
+
+.squareButton,
+.squareInvertedButton {
+  appearance: none;
+  border: var(--button-color) 2px solid;
+}
+
+.squareButton {
+  background-color: var(--button-color);
+  color: #fff;
+}
+
+.squareInvertedButton {
+  background-color: #fff;
+  color: var(--button-color);
 }
