@@ -46,12 +46,10 @@ function WeekCalendarColumn(props: WeekCalendarColumn.Props) {
 				// Calculate how many hours into the day the event ends at.
 				const endOffsetMillis = endDate.getTime() - props.day.getTime();
 				const endOffsetHours = endOffsetMillis / 1000 / 60 / 60;
-				console.log(startOffsetHours);
-
 				return <WeekCalendarColumnSession
 					controller={controller}
 					yBegin={startOffsetHours * props.cellHeight}
-					yEnd={endOffsetHours * props.cellHeight}
+					yEnd={Math.min(24 * props.cellHeight, endOffsetHours * props.cellHeight)}
 					timeFormatter={controller.timeformatter}
 					key={a.startDate}
 					session={a}/>
