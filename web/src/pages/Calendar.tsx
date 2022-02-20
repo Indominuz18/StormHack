@@ -5,6 +5,7 @@ import WeekCalendar from "$app/components/calendar/WeekCalendar";
 import Styles from "./Calendar.module.scss";
 import AssignmentList from "$app/components/calendar/AssignmentList";
 import {Assignment, AssignmentID} from "$modal/assignment";
+import AssignmentPlanner from "$app/components/calendar/AssignmentPlanner";
 
 namespace Calendar {
 	export interface Props {
@@ -13,19 +14,32 @@ namespace Calendar {
 }
 
 function Calendar(props: Calendar.Props) {
+	const {controller} = props;
+
 	const start = new Date();
 	const end = new Date(start.getFullYear(), start.getMonth(), start.getDate() + 7); // FIXME: This'll probably break towards the end of the year
 
-	const [highlighedAssignment, setHighlightedAssignment] = useState<AssignmentID | null>(null);
+	const [highlighedAssignment, setHighlightedAssignment] = useState<Assignment | null>(null);
 	const onAssignmentClick = (assignment: Assignment) => {
-		setHighlightedAssignment(assignment.id);
+		setHighlightedAssignment(assignment);
 	}
+
+	const sidebar = highlighedAssignment == null ? (
+		<AssignmentList {...props} start={start} end={end} className={Styles.assignments}
+						onAssignmentClick={onAssignmentClick}/>
+	) : (
+		<AssignmentPlanner {...props}
+						   timeFormatter={controller.timeformatter}
+						   className={Styles.planner}
+						   assignment={highlighedAssignment}
+						   onReturn={() => setHighlightedAssignment(null)}/>
+	);
 
 	return (
 		<div className={Styles.calendarPage}>
-			<AssignmentList {...props} start={start} end={end} className={Styles.assignments} onAssignmentClick={onAssignmentClick}/>
+			{sidebar}
 			<WeekCalendar {...props} start={new Date()}
-						  highlightAssignments={[highlighedAssignment].filter(n => n != null) as any}
+						  highlightAssignments={[highlighedAssignment?.id].filter(n => n != null) as any}
 						  cellHeight={50}
 			/>
 		</div>

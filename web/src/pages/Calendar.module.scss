@@ -6,6 +6,10 @@
 }
 
 .assignments {
-  background: #efefef;
   padding: $large-card-padding;
+}
+
+.assignments,
+.planner {
+  background: #efefef;
 }
